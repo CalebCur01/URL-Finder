@@ -16,14 +16,16 @@ def urlLister(url,depth):
     for url in urlList:
         urlLister(url,depth-1)
         
+quit = False
 
-url = input("Enter a url: ")
-urlLister(url,depth)
+while not quit:
+    url = input("Enter a url: ")
+    urlLister(url,depth)
 
-for url in urlList:
-    print(url)
+    for url in urlList:
+        print(url)
 
 
-exitprogram = input("Exit? Y/N?")
-if exitprogram.lower() == 'n':
-    print("ok")
+    exitprogram = input("Exit? Y/N?")
+    if exitprogram.lower() == 'y':
+        quit = True
