@@ -49,7 +49,7 @@ while not quit:
         
         print(f"\nStarting from {website}, found {len(urlList)} links in {stop-start:0.2f} seconds.")
         with open("urls.txt",'w') as file:
-            file.write(json.dumps(parentList))
+            file.write(json.dumps(parentList)) #We save the parentList to urls.txt for visualizer.py
 
         #for url in urlList:
         #   print("Website: {} Parent: {} Layer: {} ".format,(url,parentList.get(url),layerAdded.get(url)))
