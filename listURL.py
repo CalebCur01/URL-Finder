@@ -7,7 +7,4 @@ soup = bs4.BeautifulSoup(req.text, "html.parser")
 for link in soup.find_all('a'):
     print(link.get('href'))
 
-exitprogram = input("Exit? Y/N?")
-if exitprogram.lower() == 'n':
-    print("lololo")
 
