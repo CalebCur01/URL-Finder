@@ -17,7 +17,7 @@ def urlLister(url,depth):
             layerAdded.update({link:depth})
             print("Website link found! - {} - Layers remaining: {}".format(link,depth-1))
             if len(urlList) >= maximum:
-                print("Limit reached! Quitting early!")
+                print("\nLimit reached! Quitting early!")
                 return
     for url in urlList:
         if layerAdded.get(url) == depth:
@@ -32,7 +32,7 @@ while not quit:
     stop = time.perf_counter()
 
     
-    print("\nStarting from {}, found {} links in {} seconds.".format(website,len(urlList),stop-start))
+    print(f"\nStarting from {website}, found {len(urlList)} links in {stop-start:0.2f} seconds.")
 
     exitprogram = input("Exit? Y/N?")
     if exitprogram.lower() == 'y':
