@@ -5,8 +5,11 @@ layerAdded = {} #keeps track of what "layer" each link was added
 depth = 3 # how many "layers" before stopping
 maximum = 150 #Set a limit of links to discover before stopping
 
+
 def urlLister(url,depth):
     if depth == 0:
+        return
+    if len(urlList) >= maximum:
         return
     req = requests.get(url)
     soup = bs4.BeautifulSoup(req.text,"html.parser")
@@ -18,6 +21,7 @@ def urlLister(url,depth):
             print("Website link found! - {} - Layers remaining: {}".format(link,depth-1))
             if len(urlList) >= maximum:
                 print("\nLimit reached! Quitting early!")
+                terminate = True
                 return
     for url in urlList:
         if layerAdded.get(url) == depth:
