@@ -51,8 +51,7 @@ while not quit:
         with open("urls.txt",'w') as file:
             file.write(json.dumps(parentList)) #We save the parentList to urls.txt for visualizer.py
 
-        #for url in urlList:
-        #   print("Website: {} Parent: {} Layer: {} ".format,(url,parentList.get(url),layerAdded.get(url)))
+
     except:
         print("Process failed! Please enter a website!")
 
