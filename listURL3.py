@@ -14,8 +14,6 @@ def urlLister(url,depth):
         if link not in urlList and type(link) == str:
             urlList.append(link)
             layerAdded.update({link:depth})
-            print(link)
-            print(layerAdded.get(link))
     for url in urlList:
         if layerAdded.get(url) == depth:
             urlLister(url,depth-1)
