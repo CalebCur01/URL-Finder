@@ -3,14 +3,14 @@ import os, sys, bs4, requests, webbrowser, re, time
 urlList = [] #list of website links
 layerAdded = {} #keeps track of what "layer" each link was added
 depth = 3 # how many "layers" before stopping
-maximum = 8 #Set a limit of links to discover before stopping
+maximum = 150 #Set a limit of links to discover before stopping
 
 def urlLister(url,depth):
     if depth == 0:
         return
     req = requests.get(url)
     soup = bs4.BeautifulSoup(req.text,"html.parser")
-    for links in soup.find_all('a',attrs={'href': re.compile("^http://")}):
+    for links in soup.find_all('a',attrs={'href': re.compile("^http://|^https://")}):
         link = links.get('href')
         if link not in urlList and type(link) == str:
             urlList.append(link)
