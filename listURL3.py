@@ -30,14 +30,19 @@ def urlLister(url,depth):
 quit = False
 
 while not quit:
-    website = input("Enter a url: ")
-    start = time.perf_counter()
-    urlLister(website,depth)
-    stop = time.perf_counter()
+    try:
+        website = input("Enter a url: ")
+        start = time.perf_counter()
+        urlLister(website,depth)
+        stop = time.perf_counter()
 
-    
-    print(f"\nStarting from {website}, found {len(urlList)} links in {stop-start:0.2f} seconds.")
+        
+        print(f"\nStarting from {website}, found {len(urlList)} links in {stop-start:0.2f} seconds.")
+    except:
+        print("Process failed! Please enter a website!")
 
     exitprogram = input("Exit? Y/N?")
     if exitprogram.lower() == 'y':
         quit = True
+    else:
+        urlList.clear()
