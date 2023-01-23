@@ -3,7 +3,7 @@ import os, sys, bs4, requests, webbrowser, re, time
 urlList = [] #list of website links
 layerAdded = {} #keeps track of what "layer" each link was added
 depth = 3 # how many "layers" before stopping
-maximum = 150 #Set a limit of links to discover before stopping
+maximum = 300 #Set a limit of links to discover before stopping
 
 
 def urlLister(url,depth):
@@ -18,7 +18,7 @@ def urlLister(url,depth):
         if link not in urlList and type(link) == str:
             urlList.append(link)
             layerAdded.update({link:depth})
-            print("Website link found! - {} - Layers remaining: {}".format(link,depth-1))
+            print("Website link found! - {} - {}".format(link,len(urlList)))
             if len(urlList) >= maximum:
                 print("\nLimit reached! Quitting early!")
                 terminate = True
