@@ -4,8 +4,8 @@ from pathlib import Path
 urlList = [] #list of website links
 layerAdded = {} #keeps track of what "layer" each link was added
 parentList = {} #for keeping track of which link came from which website
-depth = 3 # how many "layers" before stopping
-maximum = 100 #Set a limit of links to discover before stopping
+depth = 2 # how many "layers" before stopping
+maximum = 20 #Set a limit of links to discover before stopping
 
 
 
@@ -39,6 +39,9 @@ quit = False
 while not quit:
     try:
         website = input("Enter a url: ")
+        maximum = int(input("Enter max number of links: "))
+        depth = int(input("Enter maximum depth: "))
+
         start = time.perf_counter()
         urlLister(website,depth)
         stop = time.perf_counter()
