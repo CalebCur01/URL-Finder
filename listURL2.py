@@ -11,7 +11,6 @@ def urlLister(url,depth):
     for links in soup.find_all('a',attrs={'href': re.compile("^http://")}):
         link = links.get('href')
         if link not in urlList and type(link) == str:
-            print(url)
             urlList.append(link)
     for url in urlList:
         urlLister(url,depth-1)
