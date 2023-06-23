@@ -1,5 +1,5 @@
 # URL-Finder
-Using bs4 to parse websites for urls, lists each parent:child relationship, then create a directed graph of the relationships.
+Using bs4 to find links on an initial website, then performs a depth first search. Afterwards, creates a directed graph of the chain of links.
 
 Choose a webpage to start from, a maximum number of links before quitting, and a maximum "depth" N to limit search. For example, if  N = 3 and www.foo.com -> www.bar.com -> www.bat.com -> www.baz.com, the program won't look for any further links after bat.com
 
