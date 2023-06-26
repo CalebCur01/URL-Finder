@@ -1,9 +1,10 @@
+#BFS_URL.py - Performs Breadth First Search for webpages
 import os, sys, bs4, requests, webbrowser, re, time, csv
 from collections import deque
 from pathlib import Path
 from csv_to_graph import visualize 
 
-nodes = {} #each key is a parent website, each value is a list of links found on that website
+data_dict = {} #each key is a parent website, each value is a list of links found on that website
 max_parents = 0 # how many parents before stopping
 max_children = 0 #how many children before stopping
 child_count = 0 #how many children we have added (includes duplicates)
@@ -17,10 +18,10 @@ def urlLister(parent, max_parents, max_children):
     while queue:
         parent = queue.popleft()
 
-        if parent in nodes:
+        if parent in data_dict:
             continue
 
-        nodes[parent] = []
+        data_dict[parent] = []
 
         try:
             print(f"Searching {parent} for links...")
@@ -31,13 +32,13 @@ def urlLister(parent, max_parents, max_children):
                 child = children.get('href')
 
                 if type(child) == str:
-                    nodes[parent].append(child)
+                    data_dict[parent].append(child)
                     queue.append(child)
                     child_count += 1
 
                     print("Website link found! - {} - {}".format(child,child_count))
 
-                    if child_count >= max_children or len(nodes) >= max_parents:
+                    if child_count >= max_children or len(data_dict) >= max_parents:
                         print("\nLimit reached!")
                         return
 
@@ -63,7 +64,7 @@ def save_csv(data,filename):
 quit = False
 
 while not quit:
-    nodes.clear()
+    data_dict.clear()
     child_count = 0
     parent_count = 0
     try:
@@ -77,7 +78,7 @@ while not quit:
 
         print(f"\nStarting from {website}, found {child_count} links in {stop-start:0.2f} seconds.")
 
-        save_csv(nodes,"Burls")
+        save_csv(data_dict,"Burls")
         visualize("Burls")      
 
     except Exception as e:
