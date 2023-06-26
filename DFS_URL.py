@@ -1,8 +1,9 @@
+#DFS_URL - Performs depth first search for webpages
 import os, sys, bs4, requests, webbrowser, re, time, csv
 from pathlib import Path
 from csv_to_graph import visualize 
 
-nodes = {} #each key is a parent website, each value is a list of links found on that website
+data_dict = {} #each key is a parent website, each value is a list of links found on that website
 max_parents = 0 # how many parents before stopping
 max_children = 0 #how many children before stopping
 child_count = 0     #keeps count of how many children we have added (includes duplicates)
@@ -13,10 +14,10 @@ def urlLister(parent, max_parents, max_children):
     """Search for webpages depth first"""
     global child_count
     #Skip webpages that have already been visited
-    if parent in nodes:
+    if parent in data_dict:
         return   
 
-    nodes.update({parent:[]})
+    data_dict.update({parent:[]})
 
     print(f"Searching {parent} for links...")
     req = requests.get(parent)
@@ -25,16 +26,16 @@ def urlLister(parent, max_parents, max_children):
     for children in soup.find_all('a',attrs={'href': re.compile("^http://|^https://")}):
         child = children.get('href')
         if type(child) == str:
-            nodes[parent].append(child)
+            data_dict[parent].append(child)
             child_count += 1
 
             print("Website link found! - {} - {}".format(child,child_count))
 
-            if child_count >= max_children or len(nodes) >= max_parents:
+            if child_count >= max_children or len(data_dict) >= max_parents:
                 print("\nLimit reached! Quitting early!")
                 return 'QUIT'
 
-    for child in nodes[parent]:
+    for child in data_dict[parent]:
         result = urlLister(child,max_parents,max_children)
         if result == 'QUIT':
             return 'QUIT'
@@ -57,7 +58,7 @@ def save_csv(data,filename):
 quit = False
 
 while not quit:
-    nodes.clear()
+    data_dict.clear()
     child_count = 0
     parent_count = 0
     try:
@@ -71,7 +72,7 @@ while not quit:
 
         print(f"\nStarting from {website}, found {child_count} links in {stop-start:0.2f} seconds.")
 
-        save_csv(nodes,"Durls")
+        save_csv(data_dict,"Durls")
         visualize("Durls")        
 
     except Exception as e:
