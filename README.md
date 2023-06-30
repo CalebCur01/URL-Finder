@@ -8,6 +8,12 @@ Starting from one webpage, search for links to other webpages.
 
 
 
+# Gephi (depth first)
+![Untitled](https://github.com/CalebCur01/URL-Finder/assets/25915691/1e7bc432-4566-44c8-b66f-33292d0b0173)
+
+# With Labels
+![hackaday](https://github.com/CalebCur01/URL-Finder/assets/25915691/8a678172-9fe3-43d6-aea8-7c9783b4b0f8)
+
 
 
 
